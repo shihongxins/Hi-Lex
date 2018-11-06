@@ -1,0 +1,56 @@
+
+一、Apache安装配置
+1、安装apache2.2。如 C:\Apache2_2
+2、修改 httpd.conf 文件。
+	找到 Define SRVROOT/ServerRoot ，将值改为Apache安装地址。如 "C:\Apache2_2"
+	找到 Listen ，将值改为  127.0.0.1:8080
+	//其他不必要的修改
+	找到 DocumentRoot ，将值改为你存放网站的目录 如 "C:\Apache2_2\htdocs"
+	找到 DirectoryIndex ，添加 index.php index.html 等作为网站默认入口
+	找到 ServerName ，将值改为 localhost:8080
+	命令行运行 httpd.exe  -t 检查配置文件语法是否有误
+3、运行控制台，重启 Apache
+4、浏览器中输入 localhost:8080 检查是否成功。
+
+二、PHP安装配置
+1、解压PHP安装包。如 C:\php5_2
+2、把php.ini-recommended或者php.ini-dist文件改成php.ini
+3、添加Path环境变量，值为 c:\php5_2\ 和 c:\php5_2\ext\
+
+4、在Apache的配置文件 httpd.conf 中，添加Apache对PHP的支持
+	在  AddType 下添加  AddType application/x-httpd-php .php
+	在  LoadModule 下添加 
+		LoadModule php5_module "C:\php5_2\php5apache2_2.dll"
+		PHPIniDir "C:\php5_2"
+
+5、在php.ini中配置PHP的Session
+	session.save_path = "C:/phpsessiontemp/temp"
+6、在php.ini中配置PHP的文件上传临时文件夹
+	upload_tmp_dir = "C:/phpfileuploadtemp/temp"
+7、修改PHP时区
+	date.timezone = Asia/Shanghai 或者 PRC
+8、更改默认编码
+	default_charset = "UTF-8"
+9、在网站目录新建 phpinfo.php 文件
+	内容为
+	<?php
+		phpinfo();
+	?>
+	并在浏览器中访问 localhost:8080\phpinfo.php 验证Apache能否解析PHP
+10、开启mbstring.dll扩展 
+	https://www.cnblogs.com/gyrgyr/p/7066285.html
+11、修改 extension_dir 的值为 "./ext"
+
+三、PHP链接 SQL Server
+1、mssql_ 函数链接数据库
+	支持版本 PHP5.2 及以下 MSSQL 2005 及以下。
+	①首先确认 PHP安装目录里存在 ntwdblib.dll（版本 2000.2.8.0） 及 ext目录里存在 php_mssql.dll
+	②将上述两个文件拷贝到 Windows 目录下 (有人说是导入到 Windows\System32 目录下，但是我测试后发现无效)
+	注：如果要连接 MSSQL 2008 及以上版本 请下载 新的 ntwdblib.dll（版本 2000.80.194.0 2000.80.2039.0 ）
+
+
+四、使用 PHPMailer 发送邮件
+1、下载 PHPMailer ，官方最新版是 7.0 ，但需要依赖另一个管理程序，觉得有些麻烦，便仍然采用 5.2 版本。
+2、将 class.phpmailer.php class.smtp.php PHPMailerAutoload.php 三个文件复制到程序目录，并在程序中引用
+3、开启PHP中的 php_sockets  php_openssl 扩展
+4、编写邮件信息，测试发送。
