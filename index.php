@@ -17,7 +17,7 @@
 	//设置程序等待时间为无限制
 	set_time_limit(0);
 	//echo $url;
-	$status = include './status.php';
+	$status = include './status.php';//返回值为 1 及开始运行，返回值为 0 即停止
 	if ($status){
 		# code...
 		alertAndSendMail("测试定时任务，每30秒发一份邮件"." status = ".$status." intervalTime = ".$intervalTime." url = ".$url." time = ".date("Y-m-d H:i:s",time()));
