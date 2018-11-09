@@ -18,7 +18,7 @@ ___下划线粗斜体___
   
 `<div>一行代码</div>`
 
-```
+```javascript
 <script type="text/javascript">
 	var temp;
 	function getSelection(){
