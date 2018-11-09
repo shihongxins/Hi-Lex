@@ -35,8 +35,10 @@ ___下划线粗斜体___
 
   
 ![图片](https://www.baidu.com/img/bd_logo1.png "悬停提示")  
-[链接到百度](https://www.baidu.com/ "悬停提示")
+[链接到百度](https://www.baidu.com/ "悬停提示")  
 
+[![baidu]](http://baidu.com)  
+[baidu]:http://www.baidu.com/img/bdlogo.gif "百度Logo"  
   
 1. 有序列表
 	* 无序列表
